@@ -4,8 +4,8 @@ class rigBuilder:
         self.computer = []
         ###restriction is  a set of preset restrictions
         self.restriction = {
-            money: Null, 
-            type: Null
+            money: None, 
+            type: None
         }
 
     ###to be employed during the construction of a rigBuilder settings
@@ -21,12 +21,12 @@ class rigBuilder:
         priorityScheme = 'lowestPrice'
         ##example priority list
         priorityList = {
-            "CPU": Null,
-            "GPU": Null,
-            "RAM": Null,
-            "PSU": Null,
-            "Motherboard": Null,
-            "Storage": Null
+            "CPU": None,
+            "GPU": None,
+            "RAM": None,
+            "PSU": None,
+            "Motherboard": None,
+            "Storage": None
         }
 
         
