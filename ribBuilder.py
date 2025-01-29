@@ -1,3 +1,4 @@
+import pandas as pd
 class rigBuilder:
     def __init__(self, restriction):
         ###Computer is a collection of components
