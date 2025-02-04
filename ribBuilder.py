@@ -17,12 +17,6 @@ class rigBuilder:
             dataLists[keys] = dataSheet.Datasheet[keys]
             
             
-        
-        dataLists = dataSheet.Datasheet("databaseList.csv")[0]
-        for keys in dataLists:
-            dataLists[keys] = dataSheet.Datasheet[keys]
-            
-            
 
     ###to be employed during the construction of a rigBuilder settings
 

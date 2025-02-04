@@ -1,1 +1,1 @@
-name, price, company, releaseDate, wattageUse, type, socket, speed, tier
+name, price, company, releaseDate, wattageUse, componentType, socket, speed, cores

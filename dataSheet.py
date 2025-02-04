@@ -1,4 +1,3 @@
-###switched from openpyxl to pandas
 class Datasheet:
     def __init__(self, dataSheet):
         data = []
@@ -9,3 +8,8 @@ class Datasheet:
         
         for i in range(1, len(text)) :
             data.append({text[0][num]:text[i][num] for num in range(len(text[i]))})
+
+    def convertToClass(self):
+        self.
+            
+

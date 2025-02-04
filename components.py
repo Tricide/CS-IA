@@ -29,7 +29,7 @@ class CPU(Component):
 
         
 class GPU(Component):
-    def __init__(self, name, price, company, releaseDate, wattageUse, componentType, vRAM, speed, bus, tier):
+    def __init__(self, name, price, company, releaseDate, wattageUse, componentType, vRAM, speed, bus):
         super.__init__()
         self.vRAM = vRAM
         self.speed = speed
