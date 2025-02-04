@@ -1,0 +1,2 @@
+cpu, gpu, mobo, memory, storage, psu
+cpuDatabase.csv, gpuDatabase.csv, moboDataBase.csv, memoryDataBase.csv, storageDatabase.csv, psuDataBase.csv

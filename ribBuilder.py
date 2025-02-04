@@ -1,4 +1,5 @@
 import dataSheet
+import dataSheet
 class rigBuilder:
     def __init__(self, restriction):
         ###Computer is a collection of components
@@ -6,8 +7,16 @@ class rigBuilder:
         ###restriction is  a set of preset restrictions
         self.restriction = {
             self.money: None, 
+            self.ctype: None,
+            self.money: None, 
             self.ctype: None
         }
+        
+        dataLists = dataSheet.Datasheet("databaseList.csv")[0]
+        for keys in dataLists:
+            dataLists[keys] = dataSheet.Datasheet[keys]
+            
+            
         
         dataLists = dataSheet.Datasheet("databaseList.csv")[0]
         for keys in dataLists:

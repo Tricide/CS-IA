@@ -1,12 +1,11 @@
 ###switched from openpyxl to pandas
-import pandas as pd
 class Datasheet:
-    def __init__(self, dataSheetName):
-        self.dataSheetName = dataSheetName
-        self.df = pd.read_csv(dataSheetName)
-
-    def applyRestrictions(self, type, data):
-        for x in self.df.index:
-            if self.df.loc(x, type) == data:
-                self.df.drop(x, inplace = True)
+    def __init__(self, dataSheet):
+        data = []
+        with open(dataSheet, "r") as csv_file:
+            data = csv_file.read().split("\n")
+            
+        text = [data[i].split(",") for i in range (len(data))]
         
+        for i in range(1, len(text)) :
+            data.append({text[0][num]:text[i][num] for num in range(len(text[i]))})

@@ -1,19 +1,20 @@
-from tkinter import *
 import tkinter as tk
+from tkinter import *
 import tkinter.font as font
 
-def open_start_window():
-    start_window=Tk()
-    start_window.title('start window')
-    start_window.geometry('400x300')
+def open_root():
+    root=Tk()
+    root.title('Home')
+    root.geometry('1000x750')
     
-    start_window.mainloop()
+    
+    root.mainloop()
     
     def store_page():
         print("the store is now open")
     
     def exit_window():
-        start_window.destroy()
+        root.destroy()
         
     gallery_button=tk.Button(text='Design Rig', bg='blue', fg='red', command=store_page)
     font_style = font.Font(family='Arial', size=15, weight='bold')
@@ -27,4 +28,4 @@ def open_start_window():
     
     
 
-open_start_window()
+open_root()
