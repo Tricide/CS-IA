@@ -1,4 +1,5 @@
 import components
+import user
 class Datasheet:
     def __init__(self, dataSheet):
         data = []
@@ -33,3 +34,9 @@ class Datasheet:
         elif 'memoryType' in self.data[0].keys():
             for i in range(len(self.data)):
                 self.data[i] = components.Storage(c( i, 'name'), c( i, 'price'), c( i, 'company'), c( i, 'releaseDate'), c( i, 'wattageUse'), c( i, 'componentType'), c( i, 'size'), c( i, 'speed'), c( i , 'port'), c( i , 'memoryType'))
+        elif 'username' in self.data[0].keys():
+            for i in range(len(self.data)):
+                self.data[i] = user.User(c(i, 'username'), c(i, 'password'))
+
+    def update_Sheet(self):
+        

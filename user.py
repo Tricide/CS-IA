@@ -12,10 +12,10 @@ class Order():
     
 
 class User():
-    def __init__(self, name, username, cart):
+    def __init__(self, name, username, password):
         self.name = name
         self.username = username
-        self.cart = cart
+        self.password = password
     
     def changeName(self, name):
         self.name = name

@@ -33,8 +33,40 @@ class GUITkinter():
         passwordTextBox = tk.Entry()
         passwordTextBox.pack()
 
-        submitButton = tk.Button()
+        submitButton = tk.Button(text="Submit")
+        submitButton.pack()
         self.root.mainloop()
+
+    def open_signUp(self):
+        self.clear_frame()
+        self.frame = Frame(self.root)
+        self.root.title('Sign Up')
+        self.frame.pack()
+
+        titleLabel = tk.Label(text = 'Sign Up', font = ('Arial', 16, 'bold'))
+        titleLabel.pack()
+
+        nameTextBox = tk.Entry()
+        nameTextBox.pack()
+
+        usernameTextBox = tk.Entry()
+        usernameTextBox.pack()
+
+        passwordTextBox = tk.Entry()
+        passwordTextBox.pack()
+
+        submitButton = tk.Button(text = 'Submit')
+        submitButton.pack()
+        self.root.mainloop()
+
+    def sign_Up(self, name, username, password):
+        
+    
+    def log_in(self, username, password):
+        if (True):
+            potato = 'chicken'
+    def log_out(self):
+        self.logIn = False
 
 
     def open_home(self):
@@ -48,14 +80,29 @@ class GUITkinter():
         if (self.logIn):
             
             rigBuilderButton = tk.Button(text="Rig Builder")
-            
+            rigBuilderButton.pack()
             ordersButton= tk.Button(text="Orders")
+            ordersButton.pack()
+
+            logOutButton = tk.Button(text="Log Out")
+            logOutButton.place(relx=1, rely=0, anchor='ne')
+            logOutButton.pack()
+
             
             
         else:
             print('else')
             
             logInButton = tk.Button(text='Log In', command=self.open_login)
+            logInButton.place(relx=1, rely=0, anchor='ne')
             logInButton.pack()
+
+            signUpButton = tk.Button(tk='Sign Up')
+            signUpButton.place(relx=2, rely=0, anchor='ne')
+            signUpButton.pack()
+
+
             
         self.root.mainloop()
+    
+
