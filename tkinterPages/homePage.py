@@ -16,6 +16,9 @@ class GUITkinter():
         self.root.destroy()
     
     def clear_frame(self):
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+        self.frame.pack_forget()
         self.frame.destroy()
     
     def open_login(self):
@@ -60,7 +63,7 @@ class GUITkinter():
         self.root.mainloop()
 
     def sign_Up(self, name, username, password):
-        
+        sigma='sigma'
     
     def log_in(self, username, password):
         if (True):
@@ -97,7 +100,7 @@ class GUITkinter():
             logInButton.place(relx=1, rely=0, anchor='ne')
             logInButton.pack()
 
-            signUpButton = tk.Button(tk='Sign Up')
+            signUpButton = tk.Button(text='Sign Up')
             signUpButton.place(relx=2, rely=0, anchor='ne')
             signUpButton.pack()
 
