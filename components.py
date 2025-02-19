@@ -18,8 +18,8 @@ class Component:
     
 
 class CPU(Component):
-    def __init__(self, socket, speed, cores):
-        super.__init__()
+    def __init__(self, name, price, company, releaseDate, wattageUse, componentType, socket, speed, cores):
+        super().__init__(name, price, company, releaseDate, wattageUse, componentType)
         self.socket = socket
         self.speed = speed
         self.cores = cores
@@ -30,8 +30,8 @@ class CPU(Component):
 
         
 class GPU(Component):
-    def __init__(self, vRAM, speed, bus):
-        super.__init__()
+    def __init__(self, name, price, company, releaseDate, wattageUse, componentType,vRAM, speed, bus):
+        super().__init__(name, price, company, releaseDate, wattageUse, componentType)
         self.vRAM = vRAM
         self.speed = speed
         self.bus = bus
@@ -40,8 +40,8 @@ class GPU(Component):
         return (self.speed + self.vRAM/4)
         
 class RAM(Component):
-    def __init__(self, size, rate):
-        super.__init__()
+    def __init__(self, name, price, company, releaseDate, wattageUse, componentType, size, rate):
+        super().__init__(name, price, company, releaseDate, wattageUse, componentType)
         self.size = size
         self.rate = rate
     def calculateRank(self):
@@ -57,8 +57,8 @@ class PSU(Component):
         return self.wattage
 
 class Motherboard(Component):
-    def __init__(self, socketType, formFactor, chipset, ramSpace, ram, internet, audiochip, usb2, usb3, sata3, pcie4):
-        super.__init__()
+    def __init__(self, name, price, company, releaseDate, wattageUse, componentType, socketType, formFactor, chipset, ramSpace, ram, internet, audiochip, usb2, usb3, sata3, pcie4):
+        super().__init__(name, price, company, releaseDate, wattageUse, componentType)
         self.socketType = socketType
         self.formFactor = formFactor
         self.chipset = chipset
@@ -75,8 +75,8 @@ class Motherboard(Component):
         return self.price
 
 class Storage(Component):
-    def __init__(self, size, speed, port, memoryType):
-        super.__init__()
+    def __init__(self, name, price, company, releaseDate, wattageUse, componentType, size, speed, port, memoryType):
+        super().__init__(name, price, company, releaseDate, wattageUse, componentType)
         self.size = size
         self.speed = speed
         self.port = port

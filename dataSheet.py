@@ -1,18 +1,17 @@
 import components
 import user
+import csv
 class Datasheet:
     def __init__(self, dataSheet):
-        data = []
+        self.data = []
         ###opens data
-        with open(dataSheet, "r") as csv_file:
-            data = csv_file.read().split("\n")
-            
-        text = [data[i].split(",") for i in range (len(data))]
+        self.sheetName = 'databases/' + dataSheet
         
-        for i in range(1, len(text)) :
-            data.append({text[0][num]:text[i][num] for num in range(len(text[i]))})
+        self.data = self.convertToDictFromCSV()
         
         self.convertToClass()
+        
+
 
     def convertToClass(self):
         c = lambda i,s : self.data[i][s]
@@ -38,5 +37,22 @@ class Datasheet:
             for i in range(len(self.data)):
                 self.data[i] = user.User(c(i, 'username'), c(i, 'password'))
 
-    def update_Sheet(self):
-        
+    def convertToDict(self):
+        temp = []
+        for i in range(len(self.data)):
+            temp.append(vars(self.data[i]))
+        return temp
+    
+    def convertToDictFromCSV(self):
+        temp = []
+        with open(self.sheetName, 'r') as file:
+            for i in csv.DictReader(file):
+                temp.append(dict(i))
+        return temp
+    
+    def updateDataSheet(self):
+        with open(self.sheetName, 'w', newline='') as file:
+            newData = self.convertToDict()
+            w = csv.DictWriter(file , newData[0].keys())
+            w.writeheader()
+            w.writerows(newData)

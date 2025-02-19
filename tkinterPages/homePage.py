@@ -21,44 +21,47 @@ class GUITkinter():
         self.frame.pack_forget()
         self.frame.destroy()
     
+    def create_frame(self):
+        self.frame = Frame(self.root)
+    
     def open_login(self):
         self.clear_frame()
-        self.frame = Frame(self.root)
+        self.create_frame()
         self.root.title('Log In')
-        self.frame.pack()
+        self.frame.pack( padx=20, pady=20)
 
-        titleLabel = tk.Label(text = 'Log In', font = ('Arial', 16, 'bold'))
+        titleLabel = tk.Label(self.frame, text = 'Log In', font = ('Arial', 16, 'bold'))
         titleLabel.pack()
 
-        usernameTextBox = tk.Entry()
+        usernameTextBox = tk.Entry(self.frame)
         usernameTextBox.pack()
 
-        passwordTextBox = tk.Entry()
+        passwordTextBox = tk.Entry(self.frame)
         passwordTextBox.pack()
 
-        submitButton = tk.Button(text="Submit")
+        submitButton = tk.Button(self.frame, text="Submit")
         submitButton.pack()
         self.root.mainloop()
 
     def open_signUp(self):
         self.clear_frame()
-        self.frame = Frame(self.root)
+        self.create_frame()
         self.root.title('Sign Up')
-        self.frame.pack()
+        self.frame.pack( padx=20, pady=20)
 
-        titleLabel = tk.Label(text = 'Sign Up', font = ('Arial', 16, 'bold'))
+        titleLabel = tk.Label(self.frame, text = 'Sign Up', font = ('Arial', 16, 'bold'))
         titleLabel.pack()
 
-        nameTextBox = tk.Entry()
+        nameTextBox = tk.Entry(self.frame)
         nameTextBox.pack()
 
-        usernameTextBox = tk.Entry()
+        usernameTextBox = tk.Entry(self.frame)
         usernameTextBox.pack()
 
-        passwordTextBox = tk.Entry()
+        passwordTextBox = tk.Entry(self.frame)
         passwordTextBox.pack()
 
-        submitButton = tk.Button(text = 'Submit')
+        submitButton = tk.Button(self.frame, text = 'Submit')
         submitButton.pack()
         self.root.mainloop()
 
@@ -74,17 +77,18 @@ class GUITkinter():
 
     def open_home(self):
         self.clear_frame()
-        self.frame = Frame(self.root)
+        self.create_frame()
         self.root.title('Home')
+        self.frame.pack( padx=20, pady=20)
         
-        titleLabel = tk.Label(text = 'Rig Builder Homepage', font=('Arial', 16, 'bold'))
+        titleLabel = tk.Label(self.frame, text = 'Rig Builder Homepage', font=('Arial', 16, 'bold'))
         titleLabel.pack()
 
         if (self.logIn):
             
-            rigBuilderButton = tk.Button(text="Rig Builder")
+            rigBuilderButton = tk.Button(self.frame, text="Rig Builder")
             rigBuilderButton.pack()
-            ordersButton= tk.Button(text="Orders")
+            ordersButton= tk.Button(self.frame, text="Orders")
             ordersButton.pack()
 
             logOutButton = tk.Button(text="Log Out")
@@ -96,11 +100,11 @@ class GUITkinter():
         else:
             print('else')
             
-            logInButton = tk.Button(text='Log In', command=self.open_login)
+            logInButton = tk.Button(self.frame, text='Log In', command=self.open_login)
             logInButton.place(relx=1, rely=0, anchor='ne')
             logInButton.pack()
 
-            signUpButton = tk.Button(text='Sign Up')
+            signUpButton = tk.Button(self.frame, text='Sign Up')
             signUpButton.place(relx=2, rely=0, anchor='ne')
             signUpButton.pack()
 
