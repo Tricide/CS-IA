@@ -56,3 +56,10 @@ class Datasheet:
             w = csv.DictWriter(file , newData[0].keys())
             w.writeheader()
             w.writerows(newData)
+    
+    def yieldNames(self):
+        temp = []
+        for i in range(len(self.data)):
+            temp.append(self.data[i].name)
+        
+        return temp
