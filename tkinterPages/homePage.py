@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 import tkinter.font as font
-
+import dataSheet
 class GUITkinter():
     ### initiate what will be constant throughout all the frames
     def __init__(self, logIn=False):
@@ -66,10 +66,18 @@ class GUITkinter():
         sigma='sigma'
     
     def log_in(self, username, password):
-        if (True):
-            potato = 'chicken'
+        usernameData = dataSheet.Datasheet('usernamePassword.csv')
+        if (usernameData.data[username] == password):
+            self.logIn=True
+            self.open_home()
+        
+        else:
+            message = tk.messagebox.showwarning(title='Stoopid', message="Incorrect password")
+
+            
     def log_out(self):
         self.logIn = False
+        self.open_home()
 
 
     def open_home(self):
@@ -84,6 +92,7 @@ class GUITkinter():
             
             rigBuilderButton = tk.Button(text="Rig Builder")
             rigBuilderButton.pack()
+
             ordersButton= tk.Button(text="Orders")
             ordersButton.pack()
 
@@ -107,5 +116,7 @@ class GUITkinter():
 
             
         self.root.mainloop()
+    
+        
     
 
