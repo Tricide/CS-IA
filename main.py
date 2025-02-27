@@ -1,6 +1,6 @@
 ##will generally deal with main functions
-import tkinterPages.homePage
+import homePage
 
-home = tkinterPages.homePage.GUITkinter()
+home = homePage.GUITkinter()
 print(home.logIn)
 home.open_home()

@@ -93,7 +93,7 @@ class GUITkinter():
         titleLabel = tk.Label(self.frame, text = 'Rig Builder Homepage', font=('Arial', 16, 'bold'))
         titleLabel.pack()
 
-        rigBuilderButton = tk.Button(self.frame, text="Rig Builder", command=self.rigBuilderPage())
+        rigBuilderButton = tk.Button(self.frame, text="Rig Builder", command=self.rigBuilderPage)
         rigBuilderButton.pack()
             
         if (self.logIn):
@@ -188,7 +188,8 @@ class GUITkinter():
         text = label.cget("text") + "\n"
 
         
-        
+    def genericPage(self):
+        rizz = 'rizz'
         
         
         

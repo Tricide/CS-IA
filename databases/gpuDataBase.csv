@@ -1,2 +1,3 @@
-name, price, company, releaseDate, wattageUse, componentType, vRAM, speed, bus
-Radeon RX 9070 XT, 649
+name,price,company,releaseDate,wattageUse,componentType,rank,vRAM,speed,bus
+RadeonRX9070XT,649,AMD,3/6/2025,304,GPU,0,16,2400,PCIE4
+GeForceRTX5090,2000,NVIDIA,1/30/25,575,GPU,0,32,2017,PCIE5
