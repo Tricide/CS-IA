@@ -1,1 +1,3 @@
-name, price, company, releaseDate, wattageUse, componentType, socketType, formFactor, chipset, ramSpace, ram, internet, audiochip, usb2, usb3, sata3, pcie4
+name,price,company,releaseDate,wattageUse,componentType,socketType,formFactor,chipset,ramSpace,ram,internet,audiochip,usb2,usb3,sata3,pcie
+AsusStrixB550-F,190,Asus,9/23/21,34,Mobo,AM4,ATX,AMDB550,4,4400,1,1,2,6,6,2
+GIGABYTEB650Eagle,180,GIGABYTE,2/2/24,45,Mobo,AM5,ATX,B650,4,5200,1,1,6,3,4,3

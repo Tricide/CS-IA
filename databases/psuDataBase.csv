@@ -1,1 +1,3 @@
-name, price, company, releaseDate, componentType, wattage, rating
+name,price,company,releaseDate,componentType,wattage,rating
+CorsairSF750,180,Corsair,7/2/24,PSU,750,Platinum
+AGV500,50,AGV,9/7/2022,PSU,500,Bronze
