@@ -26,10 +26,10 @@ class Datasheet:
                 self.data[i] = components.RAM(c( i, 'name'), c( i, 'price'), c( i, 'company'), c( i, 'releaseDate'), c( i, 'wattageUse'), c( i, 'componentType'), c( i, 'size'), c( i, 'rate'))
         elif 'wattage' in self.data[0].keys():
             for i in range(len(self.data)):
-                self.data[i] = components.PSU(c( i, 'name'), c( i, 'price'), c( i, 'company'), c( i, 'releaseDate'), c( i, 'wattageUse'), c( i, 'componentType'), c( i, 'wattage'), c( i, 'rating'))
+                self.data[i] = components.PSU(c( i, 'name'), c( i, 'price'), c( i, 'company'), c( i, 'releaseDate'), c( i, 'componentType'), c( i, 'wattage'), c( i, 'rating'))
         elif 'chipset' in self.data[0].keys():
             for i in range(len(self.data)):
-                self.data[i] = components.Motherboard(c( i, 'name'), c( i, 'price'), c( i, 'company'), c( i, 'releaseDate'), c( i, 'wattageUse'), c( i, 'componentType'), c( i, 'socketType'), c( i, 'formFactor'), c( i, 'chipset'), c( i, 'ramSpace'), c( i, 'ram'), c( i, 'internet'), c( i, 'audiochip'), c( i, 'usb2'), c( i, 'usb3'), c( i, 'sata3'), c( i, 'pcie4'))
+                self.data[i] = components.Motherboard(c( i, 'name'), c( i, 'price'), c( i, 'company'), c( i, 'releaseDate'), c( i, 'wattageUse'), c( i, 'componentType'), c( i, 'socketType'), c( i, 'formFactor'), c( i, 'chipset'), c( i, 'ramSpace'), c( i, 'ram'), c( i, 'internet'), c( i, 'audiochip'), c( i, 'usb2'), c( i, 'usb3'), c( i, 'sata3'), c( i, 'pcie'))
         elif 'memoryType' in self.data[0].keys():
             for i in range(len(self.data)):
                 self.data[i] = components.Storage(c( i, 'name'), c( i, 'price'), c( i, 'company'), c( i, 'releaseDate'), c( i, 'wattageUse'), c( i, 'componentType'), c( i, 'size'), c( i, 'speed'), c( i , 'port'), c( i , 'memoryType'))

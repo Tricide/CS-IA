@@ -93,7 +93,7 @@ class GUITkinter():
         titleLabel = tk.Label(self.frame, text = 'Rig Builder Homepage', font=('Arial', 16, 'bold'))
         titleLabel.pack()
 
-        rigBuilderButton = tk.Button(self.frame, text="Rig Builder", command=self.rigBuilderPage())
+        rigBuilderButton = tk.Button(self.frame, text="Rig Builder", command=self.rigBuilderPage)
         rigBuilderButton.pack()
             
         if (self.logIn):
@@ -143,35 +143,36 @@ class GUITkinter():
         
         cpuValue = tk.StringVar(self.frame)
         cpuValue.set("CPU Options")
-        cpuDropDown = tk.optionMenu(self.frame, cpuValue, *cpulist)
+        cpuDropDown = tk.OptionMenu(self.frame, cpuValue, *cpulist)
         cpuDropDown.grid(row=0, column=0, sticky=W, pady=2)
         
         gpuValue = tk.StringVar(self.frame)
         gpuValue.set("CPU Options")
-        gpuDropDown = tk.optionMenu(self.frame, gpuValue, *gpulist)
+        gpuDropDown = tk.OptionMenu(self.frame, gpuValue, *gpulist)
         gpuDropDown.grid(row=1, column=0, sticky=W, pady=2)
         
         moboValue = tk.StringVar(self.frame)
         moboValue.set("CPU Options")
-        moboDropDown = tk.optionMenu(self.frame, moboValue, *mobolist)
+        moboDropDown = tk.OptionMenu(self.frame, moboValue, *mobolist)
         moboDropDown.grid(row=2, column=0, sticky=W, pady=2)
         
         memValue = tk.StringVar(self.frame)
         memValue.set("CPU Options")
-        memDropDown = tk.optionMenu(self.frame, memValue, *memlist)
+        memDropDown = tk.OptionMenu(self.frame, memValue, *memlist)
         memDropDown.grid(row=3, column=0, sticky=W, pady=2)
         
         storageValue = tk.StringVar(self.frame)
         storageValue.set("CPU Options")
-        storageDropDown = tk.optionMenu(self.frame, storageValue, *storagelist)
+        storageDropDown = tk.OptionMenu(self.frame, storageValue, *storagelist)
         storageDropDown.grid(row=4, column=0, sticky=W, pady=2)
         
         psuValue = tk.StringVar(self.frame)
         psuValue.set("CPU Options")
-        psuDropDown = tk.optionMenu(self.frame, psuValue, *psulist)
+        psuDropDown = tk.OptionMenu(self.frame, psuValue, *psulist)
         psuDropDown.grid(row=5, column=0, sticky=W, pady=2)
         
-        
+    def genericPage(self):
+        rizz = 'rizz'
         
         
         
