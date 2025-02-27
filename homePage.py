@@ -188,8 +188,26 @@ class GUITkinter():
         text = label.cget("text") + "\n"
 
         
-    def genericPage(self):
-        rizz = 'rizz'
+    def genericPage(self, title):
+        self.clear_frame()
+        self.create_frame()
+        self.root.title(title)
+        self.frame.pack(padx=20, pady=20)
+
+        if (self.logIn == True):
+            logOutButton = tk.Button(self.frame, text="Log Out", command=self.log_out)
+            logOutButton.place(x=50,y=50)
+
+        else:
+            logInButton = tk.Button(self.frame, text="Log In", command=self.open_login)
+            logInButton.place(x=50,y=50)
+            signInButton = tk.Button(self.frame, text="Sign up", command=self.open_signUp)
+            signInButton.place(x=80,y=80)
+            
+        returnHomeButton = tk.Button(self.frame, text="Return Home", command=self.open_home)
+        returnHomeButton.place(x=80,y=80)
+
+
         
         
         
