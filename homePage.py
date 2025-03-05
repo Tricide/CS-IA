@@ -147,27 +147,27 @@ class GUITkinter():
         cpuDropDown.grid(row=0, column=0, sticky=W, pady=2)
         
         gpuValue = tk.StringVar(self.frame)
-        gpuValue.set("CPU Options")
+        gpuValue.set("GPU Options")
         gpuDropDown = tk.OptionMenu(self.frame, gpuValue, *gpulist)
         gpuDropDown.grid(row=1, column=0, sticky=W, pady=2)
         
         moboValue = tk.StringVar(self.frame)
-        moboValue.set("CPU Options")
+        moboValue.set("Motherboard Options")
         moboDropDown = tk.OptionMenu(self.frame, moboValue, *mobolist)
         moboDropDown.grid(row=2, column=0, sticky=W, pady=2)
         
         memValue = tk.StringVar(self.frame)
-        memValue.set("CPU Options")
+        memValue.set("Memory Options")
         memDropDown = tk.OptionMenu(self.frame, memValue, *memlist)
         memDropDown.grid(row=3, column=0, sticky=W, pady=2)
         
         storageValue = tk.StringVar(self.frame)
-        storageValue.set("CPU Options")
+        storageValue.set("Storage Options")
         storageDropDown = tk.OptionMenu(self.frame, storageValue, *storagelist)
         storageDropDown.grid(row=4, column=0, sticky=W, pady=2)
         
         psuValue = tk.StringVar(self.frame)
-        psuValue.set("CPU Options")
+        psuValue.set("PSU Options")
         psuDropDown = tk.OptionMenu(self.frame, psuValue, *psulist)
         psuDropDown.grid(row=5, column=0, sticky=W, pady=2)
         
