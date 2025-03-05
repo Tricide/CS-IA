@@ -129,50 +129,85 @@ class GUITkinter():
         
         ##yield data
         cpudata = dataSheet.Datasheet("cpuDataBase.csv")
-        cpulist=cpudata.yieldNames()
+        cpulist=cpudata.data
         gpudata = dataSheet.Datasheet("gpuDataBase.csv")
-        gpulist=gpudata.yieldNames()
+        gpulist=gpudata.data
         mobodata = dataSheet.Datasheet("moboDataBase.csv")
-        mobolist = mobodata.yieldNames()
+        mobolist = mobodata.data
         memdata = dataSheet.Datasheet("memoryDataBase.csv")
-        memlist = memdata.yieldNames()
+        memlist = memdata.data
         storagedata = dataSheet.Datasheet("storageDataBase.csv")
-        storagelist = storagedata.yieldNames()
+        storagelist = storagedata.data
         psudata = dataSheet.Datasheet("psuDataBase.csv")
-        psulist = psudata.yieldNames()
+        psulist = psudata.data
         
+
+        ##prepares all the dropdown menus
         cpuValue = tk.StringVar(self.frame)
         cpuValue.set("CPU Options")
-        cpuDropDown = tk.OptionMenu(self.frame, cpuValue, *cpulist)
+        cpuDropDown = tk.optionMenu(self.frame, cpuValue, *[cpulist.name for component in cpulist])
         cpuDropDown.grid(row=0, column=0, sticky=W, pady=2)
         
         gpuValue = tk.StringVar(self.frame)
-        gpuValue.set("GPU Options")
-        gpuDropDown = tk.OptionMenu(self.frame, gpuValue, *gpulist)
+        gpuValue.set("CPU Options")
+        gpuDropDown = tk.optionMenu(self.frame, gpuValue, *[gpulist.name for component in gpulist])
         gpuDropDown.grid(row=1, column=0, sticky=W, pady=2)
         
         moboValue = tk.StringVar(self.frame)
-        moboValue.set("Motherboard Options")
-        moboDropDown = tk.OptionMenu(self.frame, moboValue, *mobolist)
+        moboValue.set("CPU Options")
+        moboDropDown = tk.optionMenu(self.frame, moboValue, *[mobolist.name for component in mobolist])
         moboDropDown.grid(row=2, column=0, sticky=W, pady=2)
         
         memValue = tk.StringVar(self.frame)
-        memValue.set("Memory Options")
-        memDropDown = tk.OptionMenu(self.frame, memValue, *memlist)
+        memValue.set("CPU Options")
+        memDropDown = tk.optionMenu(self.frame, memValue, *[memlist.name for component in memlist])
         memDropDown.grid(row=3, column=0, sticky=W, pady=2)
         
         storageValue = tk.StringVar(self.frame)
-        storageValue.set("Storage Options")
-        storageDropDown = tk.OptionMenu(self.frame, storageValue, *storagelist)
+        storageValue.set("CPU Options")
+        storageDropDown = tk.optionMenu(self.frame, storageValue, *[storagelist.name for component in storagelist])
         storageDropDown.grid(row=4, column=0, sticky=W, pady=2)
         
         psuValue = tk.StringVar(self.frame)
-        psuValue.set("PSU Options")
-        psuDropDown = tk.OptionMenu(self.frame, psuValue, *psulist)
+        psuValue.set("CPU Options")
+        psuDropDown = tk.optionMenu(self.frame, psuValue, *[psulist.name for component in psulist])
         psuDropDown.grid(row=5, column=0, sticky=W, pady=2)
+
+        ##prepares all the labels
+
+        cpuLabel = tk.Label(self.frame, text="CPU:")
+        gpuLabel = tk.Label(self.frame, text="GPU:")
+        moboLabel = tk.Label(self.frame, text="Motherboard:")
+        memLabel = tk.Label(self.frame, text="Memory:")
+        storageLabel = tk.Label(self.frame, text="Storage:")
+        psuLabel = tk.Label(self.frame, text="PSU:")
+
+
+
+    def updateStatusLabels(self,label,data):
+        text = label.cget("text") + "\n"
+
         
-    def genericPage(self):
-        rizz = 'rizz'
+    def genericPage(self, title):
+        self.clear_frame()
+        self.create_frame()
+        self.root.title(title)
+        self.frame.pack(padx=20, pady=20)
+
+        if (self.logIn == True):
+            logOutButton = tk.Button(self.frame, text="Log Out", command=self.log_out)
+            logOutButton.place(x=50,y=50)
+
+        else:
+            logInButton = tk.Button(self.frame, text="Log In", command=self.open_login)
+            logInButton.place(x=50,y=50)
+            signInButton = tk.Button(self.frame, text="Sign up", command=self.open_signUp)
+            signInButton.place(x=80,y=80)
+            
+        returnHomeButton = tk.Button(self.frame, text="Return Home", command=self.open_home)
+        returnHomeButton.place(x=80,y=80)
+
+
         
         
         

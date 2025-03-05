@@ -63,3 +63,10 @@ class Datasheet:
             temp.append(self.data[i].name)
         
         return temp
+    
+    def findObject(self, name):
+        temp = None
+        for o in self.data:
+            if (o.name == name):
+                temp = o
+        return temp
