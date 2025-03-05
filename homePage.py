@@ -129,49 +129,49 @@ class GUITkinter():
         
         ##yield data
         cpudata = dataSheet.Datasheet("cpuDataBase.csv")
-        cpulist=cpudata.data
+        cpulist = ["    "] + cpudata.data
         gpudata = dataSheet.Datasheet("gpuDataBase.csv")
-        gpulist=gpudata.data
+        gpulist = ["    "] + gpudata.data
         mobodata = dataSheet.Datasheet("moboDataBase.csv")
-        mobolist = mobodata.data
+        mobolist = ["    "] + mobodata.data
         memdata = dataSheet.Datasheet("memoryDataBase.csv")
-        memlist = memdata.data
+        memlist = ["    "] + memdata.data
         storagedata = dataSheet.Datasheet("storageDataBase.csv")
-        storagelist = storagedata.data
+        storagelist = ["    "] + storagedata.data
         psudata = dataSheet.Datasheet("psuDataBase.csv")
-        psulist = psudata.data
+        psulist = ["    "] + psudata.data
         
 
         ##prepares all the dropdown menus
         cpuValue = tk.StringVar(self.frame)
         cpuValue.set("CPU Options")
-        cpuDropDown = tk.optionMenu(self.frame, cpuValue, *[cpulist.name for component in cpulist])
-        cpuDropDown.grid(row=0, column=0, sticky=W, pady=2)
+        cpuDropDown = tk.OptionMenu(self.frame, cpuValue, *[component.name for component in cpulist])
+        cpuDropDown.grid(row=1, column=0, sticky=W, pady=2)
         
         gpuValue = tk.StringVar(self.frame)
-        gpuValue.set("CPU Options")
-        gpuDropDown = tk.optionMenu(self.frame, gpuValue, *[gpulist.name for component in gpulist])
-        gpuDropDown.grid(row=1, column=0, sticky=W, pady=2)
+        gpuValue.set("GPU Options")
+        gpuDropDown = tk.OptionMenu(self.frame, gpuValue, *[component.name for component in gpulist])
+        gpuDropDown.grid(row=2, column=0, sticky=W, pady=2)
         
         moboValue = tk.StringVar(self.frame)
-        moboValue.set("CPU Options")
-        moboDropDown = tk.optionMenu(self.frame, moboValue, *[mobolist.name for component in mobolist])
-        moboDropDown.grid(row=2, column=0, sticky=W, pady=2)
+        moboValue.set("Motherboard Options")
+        moboDropDown = tk.OptionMenu(self.frame, moboValue, *[component.name for component in mobolist])
+        moboDropDown.grid(row=3, column=0, sticky=W, pady=2)
         
         memValue = tk.StringVar(self.frame)
-        memValue.set("CPU Options")
-        memDropDown = tk.optionMenu(self.frame, memValue, *[memlist.name for component in memlist])
-        memDropDown.grid(row=3, column=0, sticky=W, pady=2)
+        memValue.set("Memory Options")
+        memDropDown = tk.OptionMenu(self.frame, memValue, *[component.name for component in memlist])
+        memDropDown.grid(row=4, column=0, sticky=W, pady=2)
         
         storageValue = tk.StringVar(self.frame)
-        storageValue.set("CPU Options")
-        storageDropDown = tk.optionMenu(self.frame, storageValue, *[storagelist.name for component in storagelist])
-        storageDropDown.grid(row=4, column=0, sticky=W, pady=2)
+        storageValue.set("Storage Options")
+        storageDropDown = tk.OptionMenu(self.frame, storageValue, *[component.name for component in storagelist])
+        storageDropDown.grid(row=5, column=0, sticky=W, pady=2)
         
         psuValue = tk.StringVar(self.frame)
-        psuValue.set("CPU Options")
-        psuDropDown = tk.optionMenu(self.frame, psuValue, *[psulist.name for component in psulist])
-        psuDropDown.grid(row=5, column=0, sticky=W, pady=2)
+        psuValue.set("PSU Options")
+        psuDropDown = tk.OptionMenu(self.frame, psuValue, *[component.name for component in psulist])
+        psuDropDown.grid(row=6, column=0, sticky=W, pady=2)
 
         ##prepares all the labels
 
