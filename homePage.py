@@ -173,6 +173,11 @@ class GUITkinter():
         psuDropDown = tk.OptionMenu(self.frame, psuValue, *[component.name for component in psulist])
         psuDropDown.grid(row=6, column=0, sticky=W, pady=2)
 
+        ##option dropdowns
+        
+        types = ['regular', "gaming", 'business']
+        
+        preference = ['lowest price', 'cost-effective']
         ##prepares all the labels
 
         cpuLabel = tk.Label(self.frame, text="CPU:")
@@ -181,6 +186,9 @@ class GUITkinter():
         memLabel = tk.Label(self.frame, text="Memory:")
         storageLabel = tk.Label(self.frame, text="Storage:")
         psuLabel = tk.Label(self.frame, text="PSU:")
+        totalLabel = tk.Label(self.frame, text="Price:")
+        
+        
 
 
 
