@@ -173,13 +173,18 @@ class GUITkinter():
         psuDropDown = tk.OptionMenu(self.frame, psuValue, *[component.name for component in psulist])
         psuDropDown.grid(row=6, column=0, sticky=W, pady=2)
 
-        ##option dropdowns
-        
-        types = ['regular', "gaming", 'business']
-        
-        preference = ['lowest price', 'cost-effective']
-        ##prepares all the labels
+        ##top bar
+        price_value = tk.StringVar()
+        priceTextBar = tk.Entry(self.frame, textvariable=price_value)
+        priceTextBar.grid(row=0, column=0, sticky=W, pady=2)
 
+
+        types = ['regular', "gaming", 'business', 'computing']
+        typeValues = tk.StringVar()
+        typeOptions = tk.OptionMenu(self.frame, typeValues, types)
+        typeOptions.grid(row=0, column=1, sticky=W, pady=2)
+
+        ##prepares all the labels
         cpuLabel = tk.Label(self.frame, text="CPU:")
         gpuLabel = tk.Label(self.frame, text="GPU:")
         moboLabel = tk.Label(self.frame, text="Motherboard:")
@@ -187,6 +192,8 @@ class GUITkinter():
         storageLabel = tk.Label(self.frame, text="Storage:")
         psuLabel = tk.Label(self.frame, text="PSU:")
         totalLabel = tk.Label(self.frame, text="Price:")
+
+
         
         
 
@@ -214,6 +221,16 @@ class GUITkinter():
             
         returnHomeButton = tk.Button(self.frame, text="Return Home", command=self.open_home)
         returnHomeButton.place(x=80,y=80)
+
+    def generateLabel(self, component, type):
+        generic = ["cpu", "gpu", "motherboard", "memory", "psu", "storage"]
+        if (component.type = "CPU"):
+        if (component.type = "GPU"):
+        if (component.type = "Mobo"):
+        if (component.type = "Memory"):
+        if (component.type = "psu"):
+        if (component.type = "Storage"):
+        
 
 
         

@@ -12,7 +12,7 @@ class rigBuilder:
         
         dataLists = dataSheet.Datasheet("databaseList.csv")[0]
         for key in dataLists:
-            dataLists[key] = dataSheet.Datasheet[key]
+            dataLists[key] = dataSheet.Datasheet(dataLists[key])
             
             
 
@@ -22,9 +22,9 @@ class rigBuilder:
     def applyRestrictions(self, responseList):
         ###will determine monetary restrictions prior to ranking
         monetaryRestrictionsList = {
-            "gaming":[20,40,15,8,9,8],
-            "work/general": [30,30,15,8,9,8],
-            "powerhouse": [20,45,10,7,10,8]
+            "gaming":[.20,.40,.15,.8,.9,.8],
+            "work/general/business": [.30,.30,.15,.8,.9,.8],
+            "powerhouse": [.20,.45,.10,.7,.10,.8]
         }
         
         
