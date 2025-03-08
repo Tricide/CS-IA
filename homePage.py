@@ -3,6 +3,7 @@ from tkinter import *
 import tkinter.font as font
 import tkinter.messagebox as mb
 import dataSheet
+import components
 
 class GUITkinter():
     ### initiate what will be constant throughout all the frames
@@ -127,50 +128,70 @@ class GUITkinter():
         self.root.title("Rig Builder")
         self.frame.pack(padx=20, pady=20)
         
+        ##preparation for yieldData
+        generic = components.Component()
         ##yield data
         cpudata = dataSheet.Datasheet("cpuDataBase.csv")
-        cpulist = ["    "] + cpudata.data
+        cpulist = [generic] + cpudata.data
         gpudata = dataSheet.Datasheet("gpuDataBase.csv")
-        gpulist = ["    "] + gpudata.data
+        gpulist = [generic] + gpudata.data
         mobodata = dataSheet.Datasheet("moboDataBase.csv")
-        mobolist = ["    "] + mobodata.data
+        mobolist = [generic] + mobodata.data
         memdata = dataSheet.Datasheet("memoryDataBase.csv")
-        memlist = ["    "] + memdata.data
+        memlist = [generic] + memdata.data
         storagedata = dataSheet.Datasheet("storageDataBase.csv")
-        storagelist = ["    "] + storagedata.data
+        storagelist = [generic] + storagedata.data
         psudata = dataSheet.Datasheet("psuDataBase.csv")
-        psulist = ["    "] + psudata.data
+        psulist = [generic] + psudata.data
         
 
+        ##prepares all labels
+        ##prepares all the labels
+        cpuLabel = tk.Label(self.frame, text="CPU:")
+        cpuLabel.grid(row=1, column=1)
+        gpuLabel = tk.Label(self.frame, text="GPU:")
+        gpuLabel.grid(row=2, column=1)
+        moboLabel = tk.Label(self.frame, text="Motherboard:")
+        moboLabel.grid(row=3,column=1)
+        memLabel = tk.Label(self.frame, text="Memory:")
+        memLabel.grid(row=4,column=1)
+        storageLabel = tk.Label(self.frame, text="Storage:")
+        storageLabel.grid(row=5, column=1)
+        psuLabel = tk.Label(self.frame, text="PSU:")
+        psuLabel.grid(row=6,column=1)
+        totalLabel = tk.Label(self.frame, text="Price:")
+        totalLabel.grid(row=7,column=1)
+        
+        
         ##prepares all the dropdown menus
         cpuValue = tk.StringVar(self.frame)
         cpuValue.set("CPU Options")
-        cpuDropDown = tk.OptionMenu(self.frame, cpuValue, *[component.name for component in cpulist])
+        cpuDropDown = tk.OptionMenu(self.frame, cpuValue, *[component.name for component in gpulist], command=self.updateStatusLabels(cpuLabel, cpuValue, "CPU"))
         cpuDropDown.grid(row=1, column=0, sticky=W, pady=2)
         
         gpuValue = tk.StringVar(self.frame)
         gpuValue.set("GPU Options")
-        gpuDropDown = tk.OptionMenu(self.frame, gpuValue, *[component.name for component in gpulist])
+        gpuDropDown = tk.OptionMenu(self.frame, gpuValue, *[component.name for component in gpulist], command=self.updateStatusLabels(gpuLabel, gpuValue, "GPU"))
         gpuDropDown.grid(row=2, column=0, sticky=W, pady=2)
         
         moboValue = tk.StringVar(self.frame)
         moboValue.set("Motherboard Options")
-        moboDropDown = tk.OptionMenu(self.frame, moboValue, *[component.name for component in mobolist])
+        moboDropDown = tk.OptionMenu(self.frame, moboValue, *[component.name for component in mobolist], command=self.updateStatusLabels(moboLabel, moboValue, "Mobo"))
         moboDropDown.grid(row=3, column=0, sticky=W, pady=2)
         
         memValue = tk.StringVar(self.frame)
         memValue.set("Memory Options")
-        memDropDown = tk.OptionMenu(self.frame, memValue, *[component.name for component in memlist])
+        memDropDown = tk.OptionMenu(self.frame, memValue, *[component.name for component in memlist], command=self.updateStatusLabels(memLabel, memValue, "Mem"))
         memDropDown.grid(row=4, column=0, sticky=W, pady=2)
         
         storageValue = tk.StringVar(self.frame)
         storageValue.set("Storage Options")
-        storageDropDown = tk.OptionMenu(self.frame, storageValue, *[component.name for component in storagelist])
+        storageDropDown = tk.OptionMenu(self.frame, storageValue, *[component.name for component in storagelist], command=self.updateStatusLabels(storageLabel, storageValue, "Storage"))
         storageDropDown.grid(row=5, column=0, sticky=W, pady=2)
         
         psuValue = tk.StringVar(self.frame)
         psuValue.set("PSU Options")
-        psuDropDown = tk.OptionMenu(self.frame, psuValue, *[component.name for component in psulist])
+        psuDropDown = tk.OptionMenu(self.frame, psuValue, *[component.name for component in psulist], command=self.updateStatusLabels(psuLabel, psuValue, "PSU"))
         psuDropDown.grid(row=6, column=0, sticky=W, pady=2)
 
         ##top bar
@@ -179,19 +200,12 @@ class GUITkinter():
         priceTextBar.grid(row=0, column=0, sticky=W, pady=2)
 
 
-        types = ['regular', "gaming", 'business', 'computing']
+        types = ["gaming", 'business', 'computing']
         typeValues = tk.StringVar()
-        typeOptions = tk.OptionMenu(self.frame, typeValues, types)
+        typeOptions = tk.OptionMenu(self.frame, typeValues, *types)
         typeOptions.grid(row=0, column=1, sticky=W, pady=2)
 
-        ##prepares all the labels
-        cpuLabel = tk.Label(self.frame, text="CPU:")
-        gpuLabel = tk.Label(self.frame, text="GPU:")
-        moboLabel = tk.Label(self.frame, text="Motherboard:")
-        memLabel = tk.Label(self.frame, text="Memory:")
-        storageLabel = tk.Label(self.frame, text="Storage:")
-        psuLabel = tk.Label(self.frame, text="PSU:")
-        totalLabel = tk.Label(self.frame, text="Price:")
+        
 
 
         
@@ -199,8 +213,39 @@ class GUITkinter():
 
 
 
-    def updateStatusLabels(self,label,data):
-        text = label.cget("text") + "\n"
+    def updateStatusLabels(self,label,component, type):
+        ##finds the associated object
+        if (type=="CPU"):
+            temp = dataSheet.Datasheet("cpuDataBase.csv")
+            for o in temp.data():
+                if o.name == component:
+                    tempObject = o
+        if (type=="GPU"):
+            temp = dataSheet.Datasheet("gpuDataBase.csv")
+            for o in temp.data():
+                if o.name == component:
+                    tempObject = o
+        if (type=="Mobo"):
+            temp = dataSheet.Datasheet("moboDataBase.csv")
+            for o in temp.data():
+                if o.name == component:
+                    tempObject = o
+        if (type=="Mem"):
+            temp = dataSheet.Datasheet("memoryDataBase.csv")
+            for o in temp.data():
+                if o.name == component:
+                    tempObject = o
+        if (type=="Storage"):
+            temp = dataSheet.Datasheet("storageDataBase.csv")
+            for o in temp.data():
+                if o.name == component:
+                    tempObject = o
+        if (type=="PSU"):
+            temp = dataSheet.Datasheet("psuDataBase.csv")
+            for o in temp.data():
+                if o.name == component:
+                    tempObject = o
+        label.config(text=self.generateLabel(component))
 
         
     def genericPage(self, title):
@@ -222,22 +267,16 @@ class GUITkinter():
         returnHomeButton = tk.Button(self.frame, text="Return Home", command=self.open_home)
         returnHomeButton.place(x=80,y=80)
 
-    def generateLabel(self, component, type):
-        generic = ["cpu", "gpu", "motherboard", "memory", "psu", "storage"]
-        if (component.type = "CPU"):
-        if (component.type = "GPU"):
-        if (component.type = "Mobo"):
-        if (component.type = "Memory"):
-        if (component.type = "psu"):
-        if (component.type = "Storage"):
-        
-
-
-        
-        
-        
-        
-        
-        
-    
-
+    def generateLabel(self, component:components.Component):
+        if (component.type == "CPU"):
+            return "CPU: %s \n\t%s,%s,%s" %(component.name, component.price, component.speed, component.cores)
+        if (component.type == "GPU"):
+            return "GPU: %s \n\t%s,%s,%s" %(component.name, component.price, component.speed, component.vRAM)
+        if (component.type == "Mobo"):
+            return "Motherboard: %s \n\t%s,%s,%s,%s" %(component.name, component.price, component.chipset, component.formFactor, component.socketType)
+        if (component.type == "Memory"):
+            return "Memory: %s \n\t%s,%s,%s" %(component.name, component.price, component.speed)
+        if (component.type == "psu"):
+            return "Storage: %s \n\t%s,%s,%s" %(component.name, component.price, component.size, component.rate)
+        if (component.type == "Storage"):
+            return "PSU: %s \n\t%s,%s,%s" %(component.name, component.price, component.wattage, component.rating)
