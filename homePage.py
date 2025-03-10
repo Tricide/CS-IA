@@ -195,7 +195,7 @@ class GUITkinter():
         psuDropDown.grid(row=6, column=0, sticky=W, pady=2)
 
         ##top bar
-        price_value = tk.StringVar()
+        price_value = tk.StringVar(value="Enter Price")
         priceTextBar = tk.Entry(self.frame, textvariable=price_value)
         priceTextBar.grid(row=0, column=0, sticky=W, pady=2)
 
@@ -204,6 +204,10 @@ class GUITkinter():
         typeValues = tk.StringVar()
         typeOptions = tk.OptionMenu(self.frame, typeValues, *types)
         typeOptions.grid(row=0, column=1, sticky=W, pady=2)
+        
+        #submit button
+        submitButton = tk.Button(self.frame, text='submit')
+        submitButton.grid(row=7,column=0, sticky=S, pady=2)
 
         
 
@@ -215,37 +219,42 @@ class GUITkinter():
 
     def updateStatusLabels(self,label,component, type):
         ##finds the associated object
+        tempObject = None
         if (type=="CPU"):
             temp = dataSheet.Datasheet("cpuDataBase.csv")
-            for o in temp.data():
+            for o in temp.data:
                 if o.name == component:
                     tempObject = o
         if (type=="GPU"):
             temp = dataSheet.Datasheet("gpuDataBase.csv")
-            for o in temp.data():
+            for o in temp.data:
                 if o.name == component:
                     tempObject = o
         if (type=="Mobo"):
             temp = dataSheet.Datasheet("moboDataBase.csv")
-            for o in temp.data():
+            for o in temp.data:
                 if o.name == component:
                     tempObject = o
         if (type=="Mem"):
             temp = dataSheet.Datasheet("memoryDataBase.csv")
-            for o in temp.data():
+            for o in temp.data:
                 if o.name == component:
                     tempObject = o
         if (type=="Storage"):
             temp = dataSheet.Datasheet("storageDataBase.csv")
-            for o in temp.data():
+            for o in temp.data:
                 if o.name == component:
                     tempObject = o
         if (type=="PSU"):
             temp = dataSheet.Datasheet("psuDataBase.csv")
-            for o in temp.data():
+            for o in temp.data:
                 if o.name == component:
                     tempObject = o
-        label.config(text=self.generateLabel(component))
+                    
+        if (tempObject == None):
+            return
+        
+        label.config(text=self.generateLabel(tempObject))
 
         
     def genericPage(self, title):
