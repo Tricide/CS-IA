@@ -166,7 +166,7 @@ class GUITkinter():
         ##prepares all the dropdown menus
         cpuValue = tk.StringVar(self.frame)
         cpuValue.set("CPU Options")
-        cpuDropDown = tk.OptionMenu(self.frame, cpuValue, *[component.name for component in gpulist], command=self.updateStatusLabels(cpuLabel, cpuValue, "CPU"))
+        cpuDropDown = tk.OptionMenu(self.frame, cpuValue, *[component.name for component in cpulist], command=self.updateStatusLabels(cpuLabel, cpuValue, "CPU"))
         cpuDropDown.grid(row=1, column=0, sticky=W, pady=2)
         
         gpuValue = tk.StringVar(self.frame)
@@ -204,6 +204,11 @@ class GUITkinter():
         typeValues = tk.StringVar()
         typeOptions = tk.OptionMenu(self.frame, typeValues, *types)
         typeOptions.grid(row=0, column=1, sticky=W, pady=2)
+        
+        powerVsMoney = ["Power", "Cost-efficiency"]
+        powerValues = tk.StringVar()
+        powerOptions = tk.OptionMenu(self.frame, powerValues, *powerVsMoney)
+        powerOptions.grid(row=0,column=2,pady=2,sticky=W)
         
         #submit button
         submitButton = tk.Button(self.frame, text='submit')
