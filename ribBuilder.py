@@ -2,7 +2,7 @@ import dataSheet
 class rigBuilder:
     def __init__(self, budget, compType, mType, input):
         ###Computer is a collection of components
-        self.computer = []
+        self.computer = ['','','','','','']
         ###restriction is  a set of preset restrictions
         
         self.monetaryRestrictionsList = {
@@ -44,13 +44,15 @@ class rigBuilder:
             
             
     def algorithm(self):
-        if self.mType == "powerhouse":
+        print('rigBuilder.algorithm: algorithm entered')
+        if self.mType == "Power":
             self.powerAlgorithm()
-        if self.mType == "cost-effective":
+        if self.mType == "Cost-efficiency":
             self.algorithm2()
             
             
     def powerAlgorithm(self):
+        print('rigbuilder.powerAlgorithm: entered')
         ##search through every remaining dataList
         typeCounter = 0
         for num in self.computedRestrictions:
@@ -78,6 +80,7 @@ class rigBuilder:
         
     
     def effectiveAlgorithm(self):
+        print('rigBuilder.effectiveAlgorithm: entered')
         typeCounter = 0
         for num in self.computedRestrictions:
             if num == 0:
