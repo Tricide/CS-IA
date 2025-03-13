@@ -13,26 +13,33 @@ class rigBuilder:
         
         self.dictLists = ["cpuDataBase.csv", "gpuDataBase.csv", "moboDataBase.csv", "memoryDataBase.csv", "storageDataBase.csv", "psuDataBase.csv"]
         
+        
+        
+        
+        self.inputList = input
+        print(self.inputList)
+        
         ##allows use of any list related to components without manipulating them
-        self.computedRestrictions = [0,0,0,0,0,0]
         ##budget
         self.budget = budget
+        print(self.budget)
         
         ##business, powerhouse, gaming
         self.type = compType
+        print(self.type)
        
        
         ##mType determines the algorithm used, powerhouse allows over budget, while cost-effective stays under budget.
         self.mType = mType
-        
+        print(self.mType)
         
         ##takes inputs from homePage in this order [cpu, gpu, mobo, memory, storage, psu]        
-        self.inputList = input
+        self.computedRestrictions = [0,0,0,0,0,0]
+        self.applyRestrictions()
+        print('rigBuilder: restrictions applied')
+        print(self.computedRestrictions)
         
-        
-        self.dataLists = dataSheet.Datasheet("databaseList.csv")[0]
-        for key in self.dataLists:
-            self.dataLists[key] = dataSheet.Datasheet(self.dataLists[key])
+
             
             
             
@@ -109,12 +116,12 @@ class rigBuilder:
             ###ignore all default choices
             if response != "" and response != None:
                 ###sort through all data for the type of input
-                for component in dataSheet.Datasheet(self.dictLists[typeCounter]):
+                for component in dataSheet.Datasheet(self.dictLists[typeCounter]).data:
                     ###find component
                     if component.name == self.inputList[typeCounter]:
                         
                         ###subtract price from overall budget
-                        self.budget = self.budget - component.price
+                        self.budget = self.budget - int(component.price)
                         
                         self.computedRestrictions[typeCounter] = 1
                         

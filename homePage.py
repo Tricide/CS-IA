@@ -4,6 +4,7 @@ import tkinter.font as font
 import tkinter.messagebox as mb
 import dataSheet
 import components
+import ribBuilder
 
 class GUITkinter():
     ### initiate what will be constant throughout all the frames
@@ -195,7 +196,7 @@ class GUITkinter():
         psuDropDown.grid(row=6, column=0, sticky=W, pady=2)
 
         ##top bar
-        price_value = tk.StringVar(value="Enter Price")
+        price_value = tk.IntVar()
         priceTextBar = tk.Entry(self.frame, textvariable=price_value)
         priceTextBar.grid(row=0, column=0, sticky=W, pady=2)
 
@@ -211,7 +212,7 @@ class GUITkinter():
         powerOptions.grid(row=0,column=2,pady=2,sticky=W)
         
         #submit button
-        submitButton = tk.Button(self.frame, text='submit')
+        submitButton = tk.Button(self.frame, text='submit', command=lambda:self.processRequest([cpuValue.get(), gpuValue.get(), moboValue.get(), memValue.get(), storageValue.get(),psuValue.get()], price_value.get(), typeValues.get(),powerValues.get()))
         submitButton.grid(row=7,column=0, sticky=S, pady=2)
 
         
@@ -295,5 +296,12 @@ class GUITkinter():
         if (component.type == "Storage"):
             return "PSU: %s \n\t%s,%s,%s" %(component.name, component.price, component.wattage, component.rating)
     
-    def processRequest(self, inputList:list):
-        sigma='sigma'
+    def processRequest(self, inputList:list, budget, cType, mType):
+        print('Process Request: entered')
+        rig = ribBuilder.rigBuilder(budget, cType, mType, inputList)
+        print('Process REquest: initialization complete')
+        rig.algorithm()
+        print('Process Request: algoritm finished')
+        print(rig.computer)
+        print('Process Request: terminated')
+        
