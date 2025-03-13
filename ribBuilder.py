@@ -7,8 +7,8 @@ class rigBuilder:
         
         self.monetaryRestrictionsList = {
             "gaming":[.20,.40,.15,.8,.9,.8],
-            "work/general/business": [.30,.30,.15,.8,.9,.8],
-            "powerhouse": [.20,.45,.10,.7,.10,.8]
+            "business": [.30,.30,.15,.8,.9,.8],
+            "computing": [.20,.45,.10,.7,.10,.8]
         }
         
         self.dictLists = ["cpuDataBase.csv", "gpuDataBase.csv", "moboDataBase.csv", "memoryDataBase.csv", "storageDataBase.csv", "psuDataBase.csv"]
@@ -48,7 +48,7 @@ class rigBuilder:
         if self.mType == "Power":
             self.powerAlgorithm()
         if self.mType == "Cost-efficiency":
-            self.algorithm2()
+            self.effectiveAlgorithm()
             
             
     def powerAlgorithm(self):
@@ -62,19 +62,20 @@ class rigBuilder:
                 
                 if self.dictLists[typeCounter] == "cpuDataBase.csv" or self.dictLists[typeCounter]=="gpuDataBase.csv":
                     for item in dataList:
-                        if topChoice.speed < item.speed and item.price < self.calCompBudget(typeCounter):
+                        if int(topChoice.speed) < int(item.speed) and int(item.price) < self.calcCompBudg(typeCounter):
                             topChoice = item
                 
                 elif self.dictLists[typeCounter] == "memoryDataBase.csv" or self.dictLists[typeCounter]=="storageDataBase.csv":
                     for item in dataList:
-                        if topChoice.size < item.size and item.price < self.calCompBudget(typeCounter):
+                        if int(topChoice.size) < int(item.size) and int(item.price) < self.calcCompBudg(typeCounter):
                             topChoice = item
                 else:
                     for item in dataList:
-                        if topChoice.price < item.price and item.price < self.calCompBudget(typeCounter):
+                        if int(topChoice.price) < int(item.price) and int(item.price) < self.calcCompBudg(typeCounter):
                             topChoice = item
                 self.computer[typeCounter] = topChoice
                 self.computedRestrictions[typeCounter] = 1
+
             typeCounter = typeCounter+1
                     
         
@@ -89,19 +90,20 @@ class rigBuilder:
                 
                 if self.dictLists[typeCounter] == "cpuDataBase.csv" or self.dictLists[typeCounter]=="gpuDataBase.csv":
                     for item in dataList:
-                        if (topChoice.speed/topChoice.price) < (item.speed/item.price) and item.price < self.calCompBudget(typeCounter) and item.price>self.calcCompBudg(typeCounter)*.7:
+                        if (int(topChoice.speed)/int(topChoice.price)) < (int(item.speed)/int(item.price)) and int(item.price) < self.calcCompBudg(typeCounter) and int(item.price)>self.calcCompBudg(typeCounter)*.7:
                             topChoice = item
                 
                 elif self.dictLists[typeCounter] == "memoryDataBase.csv" or self.dictLists[typeCounter]=="storageDataBase.csv":
                     for item in dataList:
-                        if (topChoice.size/topChoice.price) < (item.size/item.price) and item.price < self.calCompBudget(typeCounter) and item.price>self.calcCompBudg(typeCounter)*.7:
+                        if (int(topChoice.size)/int(topChoice.price)) < (int(item.size)/int(item.price)) and int(item.price) < self.calcCompBudg(typeCounter) and int(item.price)>self.calcCompBudg(typeCounter)*.7:
                             topChoice = item
                 else:
                     for item in dataList:
-                        if topChoice.price < item.price and item.price < self.calCompBudget(typeCounter):
+                        if int(topChoice.price) < int(item.price) and int(item.price) < self.calcCompBudg(typeCounter):
                             topChoice = item
                 self.computer[typeCounter] = topChoice
                 self.computedRestrictions[typeCounter] = 1
+
             typeCounter = typeCounter+1
     
     
@@ -125,6 +127,7 @@ class rigBuilder:
                         
                         ###subtract price from overall budget
                         self.budget = self.budget - int(component.price)
+                        self.computer[typeCounter] = component
                         
                         self.computedRestrictions[typeCounter] = 1
                         
