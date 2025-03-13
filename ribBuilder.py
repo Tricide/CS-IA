@@ -10,6 +10,11 @@ class rigBuilder:
             "work/general/business": [.30,.30,.15,.8,.9,.8],
             "powerhouse": [.20,.45,.10,.7,.10,.8]
         }
+        
+        self.dictLists = ["cpuDataBase.csv", "gpuDataBase.csv", "moboDataBase.csv", "memoryDataBase.csv", "storageDataBase.csv", "psuDataBase.csv"]
+        
+        ##allows use of any list related to components without manipulating them
+        self.computedRestrictions = [0,0,0,0,0,0]
         ##budget
         self.budget = budget
         
@@ -24,7 +29,6 @@ class rigBuilder:
         ##takes inputs from homePage in this order [cpu, gpu, mobo, memory, storage, psu]        
         self.inputList = input
         
-        self.toFind = self.applyRestrictions()
         
         self.dataLists = dataSheet.Datasheet("databaseList.csv")[0]
         for key in self.dataLists:
@@ -41,20 +45,62 @@ class rigBuilder:
             
     def powerAlgorithm(self):
         ##search through every remaining dataList
-        for item in self.toFind:
-            dataList = 
+        typeCounter = 0
+        for num in self.computedRestrictions:
+            if num == 0:
+                dataList = dataSheet.Datasheet(self.dictLists[typeCounter]).data
+                topChoice = dataList[0]
+                
+                if self.dictLists[typeCounter] == "cpuDataBase.csv" or self.dictLists[typeCounter]=="gpuDataBase.csv":
+                    for item in dataList:
+                        if topChoice.speed < item.speed and item.price < self.calCompBudget(typeCounter):
+                            topChoice = item
+                
+                elif self.dictLists[typeCounter] == "memoryDataBase.csv" or self.dictLists[typeCounter]=="storageDataBase.csv":
+                    for item in dataList:
+                        if topChoice.size < item.size and item.price < self.calCompBudget(typeCounter):
+                            topChoice = item
+                else:
+                    for item in dataList:
+                        if topChoice.price < item.price and item.price < self.calCompBudget(typeCounter):
+                            topChoice = item
+                self.computer[typeCounter] = topChoice
+                self.computedRestrictions[typeCounter] = 1
+            typeCounter = typeCounter+1
+                    
         
     
     def effectiveAlgorithm(self):
-        sigma='sigma'
+        typeCounter = 0
+        for num in self.computedRestrictions:
+            if num == 0:
+                dataList = dataSheet.Datasheet(self.dictLists[typeCounter]).data
+                topChoice = dataList[0]
+                
+                if self.dictLists[typeCounter] == "cpuDataBase.csv" or self.dictLists[typeCounter]=="gpuDataBase.csv":
+                    for item in dataList:
+                        if (topChoice.speed/topChoice.price) < (item.speed/item.price) and item.price < self.calCompBudget(typeCounter) and item.price>self.calcCompBudg(typeCounter)*.7:
+                            topChoice = item
+                
+                elif self.dictLists[typeCounter] == "memoryDataBase.csv" or self.dictLists[typeCounter]=="storageDataBase.csv":
+                    for item in dataList:
+                        if (topChoice.size/topChoice.price) < (item.size/item.price) and item.price < self.calCompBudget(typeCounter) and item.price>self.calcCompBudg(typeCounter)*.7:
+                            topChoice = item
+                else:
+                    for item in dataList:
+                        if topChoice.price < item.price and item.price < self.calCompBudget(typeCounter):
+                            topChoice = item
+                self.computer[typeCounter] = topChoice
+                self.computedRestrictions[typeCounter] = 1
+            typeCounter = typeCounter+1
     
     
 
     ###begin to narrow down the selected; interact with data base, create a culled version
     def applyRestrictions(self):
         ###will determine monetary restrictions prior to ranking
-        dictLists = ["cpuDataBase.csv", "gpuDataBase.csv", "moboDataBase.csv", "memoryDataBase.csv", "storageDataBase.csv", "psuDataBase.csv"]
         
+        temp = self.computedRestrictions
         typeCounter = 0
         
         ###Sort through all input
@@ -63,20 +109,28 @@ class rigBuilder:
             ###ignore all default choices
             if response != "" and response != None:
                 ###sort through all data for the type of input
-                for component in dataSheet.Datasheet(dictLists[typeCounter]):
+                for component in dataSheet.Datasheet(self.dictLists[typeCounter]):
                     ###find component
                     if component.name == self.inputList[typeCounter]:
                         
                         ###subtract price from overall budget
                         self.budget = self.budget - component.price
                         
-                        del dictLists[typeCounter]
-                        typeCounter = typeCounter - 1
+                        self.computedRestrictions[typeCounter] = 1
+                        
                         
                 
             typeCounter = typeCounter + 1
             
-        return dictLists
+    def calcCompBudg(self, counter):
+        temp = []
+        for num in self.computedRestrictions:
+            for budget in self.monetaryRestrictionsList[self.type]:
+                temp.append(num*budget)
+        
+        return (temp[counter]/sum(temp))*self.budget
+        
+        
         
                 
                 

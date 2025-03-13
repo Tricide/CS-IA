@@ -294,3 +294,6 @@ class GUITkinter():
             return "Storage: %s \n\t%s,%s,%s" %(component.name, component.price, component.size, component.rate)
         if (component.type == "Storage"):
             return "PSU: %s \n\t%s,%s,%s" %(component.name, component.price, component.wattage, component.rating)
+    
+    def processRequest(self, inputList:list):
+        sigma='sigma'
