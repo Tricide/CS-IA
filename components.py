@@ -1,5 +1,5 @@
 class Component:
-    def __init__(this, name=' ', price=None, company=None, releaseDate=None, wattageUse=None, componentType=None):
+    def __init__(this, name='', price=None, company=None, releaseDate=None, wattageUse=None, componentType=None):
         this.name = name
         this.price = price
         this.company = company

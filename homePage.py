@@ -149,6 +149,8 @@ class GUITkinter():
         ##prepares all labels
         ##prepares all the labels
         labels=[]
+        totalLabel = tk.Label(self.frame, text="Price:")
+        labels.append(totalLabel)
         cpuLabel = tk.Label(self.frame, text="CPU:")
         cpuLabel.grid(row=1, column=1)
         labels.append(cpuLabel)
@@ -167,7 +169,7 @@ class GUITkinter():
         psuLabel = tk.Label(self.frame, text="PSU:")
         psuLabel.grid(row=6,column=1)
         labels.append(psuLabel)
-        totalLabel = tk.Label(self.frame, text="Price:")
+        
         totalLabel.grid(row=7,column=1)
         
         
@@ -175,32 +177,32 @@ class GUITkinter():
         ##prepares all the dropdown menus
         cpuValue = tk.StringVar(self.frame)
         cpuValue.set("CPU Options")
-        cpuDropDown = tk.OptionMenu(self.frame, cpuValue, *[component.name for component in cpulist], command=lambda:self.updateStatusLabels(cpuLabel, cpuValue, "CPU"))
+        cpuDropDown = tk.OptionMenu(self.frame, cpuValue, *[component.name for component in cpulist], command=lambda x:self.updateStatusLabels(cpuLabel, x, "CPU"))
         cpuDropDown.grid(row=1, column=0, sticky=W, pady=2)
         
         gpuValue = tk.StringVar(self.frame)
         gpuValue.set("GPU Options")
-        gpuDropDown = tk.OptionMenu(self.frame, gpuValue, *[component.name for component in gpulist], command=lambda:self.updateStatusLabels(gpuLabel, gpuValue, "GPU"))
+        gpuDropDown = tk.OptionMenu(self.frame, gpuValue, *[component.name for component in gpulist], command=lambda x:self.updateStatusLabels(gpuLabel, x, "GPU"))
         gpuDropDown.grid(row=2, column=0, sticky=W, pady=2)
         
         moboValue = tk.StringVar(self.frame)
         moboValue.set("Motherboard Options")
-        moboDropDown = tk.OptionMenu(self.frame, moboValue, *[component.name for component in mobolist], command=lambda:self.updateStatusLabels(moboLabel, moboValue, "Mobo"))
+        moboDropDown = tk.OptionMenu(self.frame, moboValue, *[component.name for component in mobolist], command=lambda x:self.updateStatusLabels(moboLabel, x, "Mobo"))
         moboDropDown.grid(row=3, column=0, sticky=W, pady=2)
         
         memValue = tk.StringVar(self.frame)
         memValue.set("Memory Options")
-        memDropDown = tk.OptionMenu(self.frame, memValue, *[component.name for component in memlist], command=lambda:self.updateStatusLabels(memLabel, memValue, "Memory"))
+        memDropDown = tk.OptionMenu(self.frame, memValue, *[component.name for component in memlist], command=lambda x:self.updateStatusLabels(memLabel, x, "Memory"))
         memDropDown.grid(row=4, column=0, sticky=W, pady=2)
         
         storageValue = tk.StringVar(self.frame)
         storageValue.set("Storage Options")
-        storageDropDown = tk.OptionMenu(self.frame, storageValue, *[component.name for component in storagelist], command=lambda:self.updateStatusLabels(storageLabel, storageValue, "storage"))
+        storageDropDown = tk.OptionMenu(self.frame, storageValue, *[component.name for component in storagelist], command=lambda x:self.updateStatusLabels(storageLabel, x, "storage"))
         storageDropDown.grid(row=5, column=0, sticky=W, pady=2)
         
         psuValue = tk.StringVar(self.frame)
         psuValue.set("PSU Options")
-        psuDropDown = tk.OptionMenu(self.frame, psuValue, *[component.name for component in psulist], command=lambda:self.updateStatusLabels(psuLabel, psuValue, "PSU"))
+        psuDropDown = tk.OptionMenu(self.frame, psuValue, *[component.name for component in psulist], command=lambda x:self.updateStatusLabels(psuLabel, x, "PSU"))
         psuDropDown.grid(row=6, column=0, sticky=W, pady=2)
 
         ##top bar
@@ -234,6 +236,9 @@ class GUITkinter():
     def updateStatusLabels(self,label,component, type):
         ##finds the associated object
         tempObject = None
+        if component=='':
+            label.config(text=type+":")
+            return
         if (type=="CPU"):
             temp = dataSheet.Datasheet("cpuDataBase.csv")
             for o in temp.data:
@@ -290,26 +295,30 @@ class GUITkinter():
 
     def generateLabel(self, component:components.Component):
         if (component.componentType == "CPU"):
-            return "CPU: %s \n\t%s,%s,%s" %(component.name, component.price, component.speed, component.cores)
+            return "CPU: %s \n\t$%s,%sGHz,%s Cores" %(component.name, component.price, component.speed, component.cores)
         if (component.componentType == "GPU"):
-            return "GPU: %s \n\t%s,%s,%s" %(component.name, component.price, component.speed, component.vRAM)
+            return "GPU: %s \n\t$%s,%sGHz,%s GB vRAM" %(component.name, component.price, component.speed, component.vRAM)
         if (component.componentType == "Mobo"):
-            return "Motherboard: %s \n\t%s,%s,%s,%s" %(component.name, component.price, component.chipset, component.formFactor, component.socketType)
+            return "Motherboard: %s \n\t$%s,%s,%s,%s" %(component.name, component.price, component.chipset, component.formFactor, component.socketType)
         if (component.componentType == "Memory"):
-            return "Memory: %s \n\t%s,%s,%s" %(component.name, component.price, component.speed)
-        if (component.componentType == "psu"):
-            return "Storage: %s \n\t%s,%s,%s" %(component.name, component.price, component.size, component.rate)
-        if (component.componentType == "Storage"):
-            return "PSU: %s \n\t%s,%s,%s" %(component.name, component.price, component.wattage, component.rating)
+            return "Memory: %s \n\t$%s,%sGHz" %(component.name, component.price, component.rate)
+        if (component.componentType == "storage"):
+            return "Storage: %s \n\t$%s,%sGB,%s" %(component.name, component.price, component.size, component.speed)
+        if (component.componentType == "PSU"):
+            return "PSU: %s \n\t$%s,%sW,%s" %(component.name, component.price, component.wattage, component.rating)
     
     def processRequest(self, inputList:list, budget, cType, mType, labels):
         print('Process Request: entered')
         rig = ribBuilder.rigBuilder(budget, cType, mType, inputList)
         print('Process REquest: initialization complete')
         rig.algorithm()
-        print('Process Request: algoritm finished')
+        print('Process Request: algorithm finished')
         print(rig.computer)
+        print(rig.computer[0].name)
         print('Process Request: terminated')
-        for i in range(len(labels)):
-            labels[i].config(self.generateLabel(rig.computer[i]))
-        
+        total=0
+        for i in range(len(rig.computer)):
+            labels[i+1].config(text=self.generateLabel(rig.computer[i]))
+            total = total + int(rig.computer[i].price)
+        labels[0].config(text="Price: $%s"%(total))
+            
